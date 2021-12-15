@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,9 +8,25 @@
     <link rel="stylesheet" href="css/main.css">
     <title>meme-generator</title>
 </head>
-<body>
-    
 
-    <script src="js/main.js"></script>
+<body onload="loadImages()">
+    <header class="header"></header>
+
+    <main class="main">
+        <div class="gallery">
+            <!-- <img src="img/1.jpg" ></img> -->
+        </div>
+
+        <div class="meme-editor" style="display: none;">
+            <canvas class="canvas" width="500" height="550"></canvas>
+        </div>
+
+    </main>
+
+    <footer class="footer"></footer>
+
+    <script src="js/memeController.js"></script>
+    <script src="js/meme-service.js"></script>
 </body>
+
 </html>
