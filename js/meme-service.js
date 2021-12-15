@@ -13,13 +13,49 @@ var gMeme = {
     lines: [
         {
             txt: 'I sometimes eat Falafel',
-            size: 20,
-            align: 'left',
-            color: 'red'
+            size: 40,
+            align: 'center',
+            color: 'white',
+            font: 'impact'
         }
     ]
 }
 
+function chooseImage(id) {
+    gMeme.selectedImgId = id;
+}
+
+function setLineTxt(txt) {
+    var lineIdx = gMeme.selectedLineIdx;
+    gMeme.lines[lineIdx].txt = txt;
+}
+
+function setNewColor(color) {
+    var lineIdx = gMeme.selectedLineIdx;
+    gMeme.lines[lineIdx].color = color;
+}
+
+function changeSize(size) {
+    var lineIdx = gMeme.selectedLineIdx;
+    gMeme.lines[lineIdx].size += size;
+}
+
+function addLine() {
+    var newLine = {
+        txt: '',
+        size: 40,
+        align: 'center',
+        color: 'white',
+        font: 'impact'
+    }
+    gMeme.lines.push(newLine);
+    gMeme.selectedLineIdx = gMeme.lines.length-1;
+}
+
+
 function getImages() {
     return gImgs;
+}
+function getMeme() {
+    return gMeme;
 }

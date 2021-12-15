@@ -1,3 +1,15 @@
 * {
     box-sizing: border-box;
 }
+
+@font-face {
+    font-family: impact;
+    src: url(../fonts/impact.ttf);
+}
+
+.meme-editor {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}

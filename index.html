@@ -13,18 +13,26 @@
     <header class="header"></header>
 
     <main class="main">
-        <div class="gallery">
-            <!-- <img src="img/1.jpg" ></img> -->
-        </div>
+        <div class="gallery"></div>
 
         <div class="meme-editor" style="display: none;">
             <canvas class="canvas" width="500" height="550"></canvas>
+
+            <div class="controll-area">
+                <input type="text" class="text-input" onchange="onTxtChange(this.value)" 
+                placeholder="Enter your text">
+                <input type="color" class="color-input" onchange="onChangeColor(this.value)" value="#ffffff">
+                <button data-sign="+" onclick="onChangeSize(this)">A⁺</button>
+                <button data-sign="-" onclick="onChangeSize(this)">A⁻</button>
+                <button onclick="onAddLine()">+</button>
+            </div>
         </div>
 
     </main>
 
     <footer class="footer"></footer>
 
+    <script src="js/galleryController.js"></script>
     <script src="js/memeController.js"></script>
     <script src="js/meme-service.js"></script>
 </body>
