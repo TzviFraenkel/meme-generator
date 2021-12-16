@@ -13,4 +13,5 @@ function onImgClicked(id) {
     document.querySelector('.meme-editor').style = 'display: flex;'
     chooseImage(id);
     renderMeme()
+    document.querySelector('.text-input').focus();
 }

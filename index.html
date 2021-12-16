@@ -24,7 +24,12 @@
                 <input type="color" class="color-input" onchange="onChangeColor(this.value)" value="#ffffff">
                 <button data-sign="+" onclick="onChangeSize(this)">A⁺</button>
                 <button data-sign="-" onclick="onChangeSize(this)">A⁻</button>
-                <button onclick="onAddLine()">+</button>
+                <button onclick="onAddLine()" title="add new line">+</button>
+                <button class="fa align-left" data-align="left" onclick="onAlignChange(this)"></button>
+                <button class="fa align-center" data-align="center" onclick="onAlignChange(this)"></button>
+                <button class="fa align-right" data-align="right" onclick="onAlignChange(this)"></button>
+                <button onclick="onMoveline(-1)" title="line up">↑</button>
+                <button onclick="onMoveline(1)" title="line down">↓</button>
             </div>
         </div>
 

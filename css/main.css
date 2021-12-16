@@ -6,6 +6,25 @@
     font-family: impact;
     src: url(../fonts/impact.ttf);
 }
+@font-face {
+    font-family: fa;
+    src: url(../fonts/fa-solid-900.ttf);
+}
+
+/* FONT_AWESOME */
+.fa {
+    font-family: fa;
+}
+.align-left::before{
+    content: "\f036";
+} 
+.align-center::before{
+    content: "\f037";
+} 
+.align-right::before{
+    content: "\f038";
+} 
+
 
 .meme-editor {
     width: 100vw;

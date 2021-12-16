@@ -16,7 +16,8 @@ var gMeme = {
             size: 40,
             align: 'center',
             color: 'white',
-            font: 'impact'
+            font: 'impact',
+            offsetY: 50 
         }
     ]
 }
@@ -40,22 +41,37 @@ function changeSize(size) {
     gMeme.lines[lineIdx].size += size;
 }
 
+function alignChange(align) {
+    var lineIdx = gMeme.selectedLineIdx;
+    gMeme.lines[lineIdx].align = align;
+}
+
 function addLine() {
+    if (gMeme.lines.length >= 2) return //sopports only two lines by now
     var newLine = {
         txt: '',
         size: 40,
         align: 'center',
         color: 'white',
-        font: 'impact'
+        font: 'impact',
+        offsetY: gCanvas.height-80
     }
     gMeme.lines.push(newLine);
     gMeme.selectedLineIdx = gMeme.lines.length-1;
 }
 
+function moveline(diff) {
+    gMeme.selectedLineIdx += diff
+    if (gMeme.selectedLineIdx > gMeme.lines.length-1) gMeme.selectedLineIdx = 0;
+    if (gMeme.selectedLineIdx < 0) gMeme.selectedLineIdx = gMeme.lines.length-1;
+}
 
 function getImages() {
     return gImgs;
 }
 function getMeme() {
     return gMeme;
+}
+function getLine() {
+    return gMeme.lines[gMeme.selectedLineIdx]
 }
