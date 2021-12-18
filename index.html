@@ -10,32 +10,50 @@
 </head>
 
 <body onload="loadImages()">
-    <header class="header"></header>
+    <header class="header">
+        <img class="logoImg" src="img/LOGO.png" alt="logo">
+        <div class="galleryLink" onclick="onGalleryChoice()">Gallery</div>
+        <!-- <div class="savedMemes">memes</div> -->
+    </header>
 
     <main class="main">
         <div class="gallery"></div>
 
         <div class="meme-editor" style="display: none;">
-            <canvas class="canvas" width="500" height="550"></canvas>
+            <canvas class="canvas" width="500" height="500"></canvas>
 
-            <div class="controll-area">
-                <input type="text" class="text-input" onchange="onTxtChange(this.value)" 
+            <div class="control-area">
+                <input type="text" class="text-input" oninput="onTxtChange(this.value)" 
                 placeholder="Enter your text">
-                <input type="color" class="color-input" onchange="onChangeColor(this.value)" value="#ffffff">
-                <button data-sign="+" onclick="onChangeSize(this)">A⁺</button>
-                <button data-sign="-" onclick="onChangeSize(this)">A⁻</button>
                 <button onclick="onAddLine()" title="add new line">+</button>
-                <button class="fa align-left" data-align="left" onclick="onAlignChange(this)"></button>
-                <button class="fa align-center" data-align="center" onclick="onAlignChange(this)"></button>
-                <button class="fa align-right" data-align="right" onclick="onAlignChange(this)"></button>
-                <button onclick="onMoveline(-1)" title="line up">↑</button>
-                <button onclick="onMoveline(1)" title="line down">↓</button>
+                <button onclick="onMoveline(-1)" title="move line upwards">↥</button>
+                <button onclick="onMoveline(1)" title="move line downwards">↧</button>
+                <button onclick="onLineSlect(-1)" title="line up">↑</button>
+                <button onclick="onLineSlect(1)" title="line down">↓</button>
+                <button class="fa trash" onclick="onDeleteLine()" title="“delete line"></button>
+                <button data-sign="+" onclick="onChangeSize(this)" title="text size">A⁺</button>
+                <button data-sign="-" onclick="onChangeSize(this)" title="text size">A⁻</button>
+                <button class="fa align-left" data-align="left" onclick="onAlignChange(this)" title="align left"></button>
+                <button class="fa align-center" data-align="center" onclick="onAlignChange(this)" title="align center"></button>
+                <button class="fa align-right" data-align="right" onclick="onAlignChange(this)" title="align right"></button>
+                <select class="input-font" value="impact" onchange="onChangeFont(this.value)">
+                    <option value="impact">impact</option>
+                    <option value="arcane">arcane</option>
+                    <option value="egyp">Egyptien</option>
+                </select>
+                <button class="fa stroke" onclick="onToggleStroke()" title="stroke"></button>
+                <input type="color" class="color-input" onchange="onChangeColor(this.value)" 
+                title="color choose" value="#ffffff">
+                </div>
             </div>
-        </div>
-
+            <!-- uploads the fonts -->
+            <span style="font-family: impact; visibility: hidden;">a</span>
+            <span style="font-family: egyp; visibility: hidden;">a</span>
+            <span style="font-family: arcane; visibility: hidden;">a</span>
     </main>
 
     <footer class="footer"></footer>
+
 
     <script src="js/galleryController.js"></script>
     <script src="js/memeController.js"></script>
