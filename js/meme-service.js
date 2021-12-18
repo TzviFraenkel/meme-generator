@@ -1,6 +1,7 @@
 'use strict'
 
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
+var gIsSecondLine = true
 var gImgs = [
     { id: 1, url: 'img/1.jpg', keywords: ['funny', 'cat'] },
     { id: 2, url: 'img/2.jpg', keywords: ['funny', 'cat'] },
@@ -26,7 +27,7 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            txt: 'I sometimes eat Falafel',
+            txt: '',
             size: 40,
             align: 'center',
             color: 'white',
@@ -78,7 +79,11 @@ function moveline(diff) {
 }
 
 function addLine() {
-    if (gMeme.lines.length >= 2) return //sopports only two lines by now
+    // if (gMeme.lines.length >= 2) return //sopports only two lines by now
+    var canvasHeight = getCanvasHeight();
+    var lineOffset;
+    if (gIsSecondLine) lineOffset = canvasHeight - 40;
+    else lineOffset = canvasHeight/2 -20;
     var newLine = {
         txt: '',
         size: 40,
@@ -86,15 +91,19 @@ function addLine() {
         color: 'white',
         font: 'impact',
         stroke: true,
-        offsetY: gCanvas.height - 40
+        offsetY: lineOffset
     }
     gMeme.lines.push(newLine);
     gMeme.selectedLineIdx = gMeme.lines.length - 1;
+    gIsSecondLine = false;
 }
 
 function deleteLine() {
     var lineIdx = gMeme.selectedLineIdx;
     gMeme.lines.splice(lineIdx, 1);
+    gMeme.lines.sort((a,b) => a.offsetY - b.offsetY)
+    console.log(gMeme.lines);
+    gMeme.selectedLineIdx = 0;
 }
 
 function selectLine(diff) {

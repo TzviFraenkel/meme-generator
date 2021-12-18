@@ -41,6 +41,9 @@ body {
 .trash::before{
     content: "\f2ed";
 } 
+.add::before{
+    content: "\f067";
+} 
 
 /* HAEDER */
 .header {
@@ -89,7 +92,9 @@ main{
     object-fit: contain;
     justify-self: center;
 }
-
+.gallery img:hover{
+    cursor: pointer;
+}
 /* EDITOR */
 .meme-editor {
     width: 100%;
@@ -113,6 +118,10 @@ main{
 }
 .input-font {
     grid-area: 4/1/4/4;
+}
+.control-area .download {
+    width: auto;
+    grid-area: 5/1/5/3;
 }
 .control-area button {
     background-color: white;
@@ -146,3 +155,18 @@ main{
         flex-direction: row;
     }
 }
+/* @media (max-width: 470px) {
+    .gallery {
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+
+        grid-auto-rows: 200px;
+    }
+        .gallery img {
+        height: 400px;
+        width: 90%;
+        object-fit: contain;
+        justify-self: center;
+    }
+} */

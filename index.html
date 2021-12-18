@@ -23,9 +23,8 @@
             <canvas class="canvas" width="500" height="500"></canvas>
 
             <div class="control-area">
-                <input type="text" class="text-input" oninput="onTxtChange(this.value)" 
-                placeholder="Enter your text">
-                <button onclick="onAddLine()" title="add new line">+</button>
+                <input type="text" class="text-input" oninput="onTxtChange(this.value)" placeholder="Enter your text">
+                <button class="fa add" onclick="onAddLine()" title="add new line"></button>
                 <button onclick="onMoveline(-1)" title="move line upwards">↥</button>
                 <button onclick="onMoveline(1)" title="move line downwards">↧</button>
                 <button onclick="onLineSlect(-1)" title="line up">↑</button>
@@ -33,23 +32,28 @@
                 <button class="fa trash" onclick="onDeleteLine()" title="“delete line"></button>
                 <button data-sign="+" onclick="onChangeSize(this)" title="text size">A⁺</button>
                 <button data-sign="-" onclick="onChangeSize(this)" title="text size">A⁻</button>
-                <button class="fa align-left" data-align="left" onclick="onAlignChange(this)" title="align left"></button>
-                <button class="fa align-center" data-align="center" onclick="onAlignChange(this)" title="align center"></button>
-                <button class="fa align-right" data-align="right" onclick="onAlignChange(this)" title="align right"></button>
+                <button class="fa align-left" data-align="left" onclick="onAlignChange(this)"
+                    title="align left"></button>
+                <button class="fa align-center" data-align="center" onclick="onAlignChange(this)"
+                    title="align center"></button>
+                <button class="fa align-right" data-align="right" onclick="onAlignChange(this)"
+                    title="align right"></button>
                 <select class="input-font" value="impact" onchange="onChangeFont(this.value)">
                     <option value="impact">impact</option>
                     <option value="arcane">arcane</option>
                     <option value="egyp">Egyptien</option>
                 </select>
                 <button class="fa stroke" onclick="onToggleStroke()" title="stroke"></button>
-                <input type="color" class="color-input" onchange="onChangeColor(this.value)" 
-                title="color choose" value="#ffffff">
-                </div>
+                <input type="color" class="color-input" onchange="onChangeColor(this.value)" title="color choose"
+                    value="#ffffff">
+                <button class="download"><a href="#" onclick="downloadImg(this)" download="my-meme.jpg">Download</a>
+                </button>
             </div>
-            <!-- uploads the fonts -->
-            <span style="font-family: impact; visibility: hidden;">a</span>
-            <span style="font-family: egyp; visibility: hidden;">a</span>
-            <span style="font-family: arcane; visibility: hidden;">a</span>
+        </div>
+        <!-- uploads the fonts -->
+        <span style="font-family: impact; visibility: hidden;">a</span>
+        <span style="font-family: egyp; visibility: hidden;">a</span>
+        <span style="font-family: arcane; visibility: hidden;">a</span>
     </main>
 
     <footer class="footer"></footer>
