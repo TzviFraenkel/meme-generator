@@ -2,12 +2,12 @@
 
 var gCanvas = document.querySelector('.canvas');
 var gCtx = gCanvas.getContext('2d')
-
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 var renderForDownload = false;
 
 function addListeners() {
-    // addMouseListeners();
-    // addTouchListeners();
+    addMouseListeners();
+    addTouchListeners();
 }
 
 function renderMeme() {
@@ -17,36 +17,25 @@ function renderMeme() {
     gCtx.drawImage(img, 0, 0)
     //render lines:
     meme.lines.forEach((line, index) => {
-        gCtx.textAlign = line.offsetX;
-        var offsetX = gCanvas.width / 2;
-        if (line.offsetX === 'right') offsetX = gCanvas.width - 10;
-        if (line.offsetX === 'left') offsetX = 10;
+        gCtx.textAlign = 'center';
         gCtx.fillStyle = line.color;
         gCtx.font = `${line.size}px ${line.font}`;
-        gCtx.fillText(line.txt, offsetX, line.offsetY)
+        gCtx.fillText(line.txt, line.offsetX, line.offsetY)
         if (line.stroke) {
             gCtx.lineWidth = 2;
-            gCtx.strokeText(line.txt, offsetX, line.offsetY)
+            gCtx.strokeText(line.txt, line.offsetX, line.offsetY)
         }
         if (index === meme.selectedLineIdx && !renderForDownload) {
-            drowrect(line, offsetX);
+            drowrect(line);
         }
 
     })
 }
 
-function drowrect(line, offsetX) {
+function drowrect(line) {
     gCtx.fillStyle = '#d3cdcd5d';
     var textWidth = gCtx.measureText(line.txt).width;
-    if (line.offsetX === 'left') {
-        gCtx.fillRect(offsetX - 5, line.offsetY - line.size, textWidth + 10, line.size + 10)
-    }
-    if (line.offsetX === 'right') {
-        gCtx.fillRect(offsetX - textWidth - 5, line.offsetY - line.size, textWidth + 10, line.size + 10)
-    }
-    if (line.offsetX === 'center') {
-        gCtx.fillRect(offsetX - (textWidth / 2) - 5, line.offsetY - line.size, textWidth + 10, line.size + 10)
-    }
+    gCtx.fillRect(line.offsetX - (textWidth / 2) - 5, line.offsetY - line.size, textWidth + 10, line.size + 10)
 }
 
 function onTxtChange(txt) {
@@ -93,9 +82,9 @@ function onDeleteLine() {
     renderMeme();
 }
 
-function onLineSlect() {
-    selectLine();
-    setLinesData()
+function onLineSelect(index) {
+    selectLine(index);
+    setLinesData();
     renderMeme();
 }
 
@@ -116,7 +105,14 @@ function onMoveline(diff) {
 }
 
 function getCanvasHeight() {
-    return gCanvas.height
+    return gCanvas.height;
+}
+function getCanvasWidth() {
+    return gCanvas.width;
+}
+function getTextWidth() {
+    return gCtx.measureText(getLine().txt).width;
+
 }
 
 function onGalleryChoice() {
@@ -149,30 +145,37 @@ function addTouchListeners() {
 
 function onDown(ev) {
     const pos = getEvPos(ev)
-    if (!isCircleClicked(pos)) return
-    setCircleDrag(true)
-    gStartPos = pos
+    if (!isLineClicked(pos)) return
+    setLineDrag(true);
     document.body.style.cursor = 'grabbing'
 
 }
 
 function onMove(ev) {
-    const circle = getCircle();
-    if (!circle.isDrag) return
+    if (!getLine().isDrag) return
     const pos = getEvPos(ev)
-    const dx = pos.x - gStartPos.x
-    const dy = pos.y - gStartPos.y
-    moveCircle(dx, dy)
-    gStartPos = pos
-    renderCanvas()
-
+    moveLinePosition(pos);
+    renderMeme();
 }
 
 function onUp() {
-    setCircleDrag(false)
-    document.body.style.cursor = 'grab'
+    setLineDrag(false);
+    document.body.style.cursor = 'auto'
 }
 
+function isLineClicked(pos) {
+    var meme = getMeme();
+    for (let i = 0; i < meme.lines.length; i++) {
+        var line = meme.lines[i];
+        var textWidth = gCtx.measureText(line.txt).width;
+        if (pos.x > line.offsetX - (textWidth / 2) - 5 && pos.x < line.offsetX + (textWidth / 2) + 5
+            && pos.y > line.offsetY - line.size && pos.y < line.offsetY + 10) {
+            onLineSelect(i);
+            return true;
+        }
+    };
+    return false;
+}
 function getEvPos(ev) {
     var pos = {
         x: ev.offsetX,

@@ -32,7 +32,8 @@ var gMeme = {
             color: '#ffffff',
             font: 'impact',
             stroke: true,
-            offsetX: 'center',
+            isDrag: false,
+            offsetX: getCanvasWidth() / 2,
             offsetY: 50
         }
     ]
@@ -43,39 +44,46 @@ function chooseImage(id) {
 }
 
 function setLineTxt(txt) {
-    var lineIdx = gMeme.selectedLineIdx;
-    gMeme.lines[lineIdx].txt = txt;
+    getLine().txt = txt;
 }
 
 function setNewColor(color) {
-    var lineIdx = gMeme.selectedLineIdx;
-    gMeme.lines[lineIdx].color = color;
+    getLine().color = color;
 }
 
 function changeSize(size) {
-    var lineIdx = gMeme.selectedLineIdx;
-    gMeme.lines[lineIdx].size += size;
+    getLine().size += size;
 }
 
-function alignChange(offsetX) {
-    var lineIdx = gMeme.selectedLineIdx;
-    gMeme.lines[lineIdx].offsetX = offsetX;
+function setLineDrag (val) {
+    getLine().isDrag = val;
+}
+
+function alignChange(align) {
+    var line = getLine();
+    var canvasWidth = getCanvasWidth();
+    var textWidth = getTextWidth();
+    if (align === 'center') line.offsetX = canvasWidth / 2;
+    if (align === 'right') line.offsetX = canvasWidth - 10 - (textWidth / 2);
+    if (align === 'left') line.offsetX = 10 + (textWidth / 2);
 }
 
 function changeFont(font) {
-    var lineIdx = gMeme.selectedLineIdx;
-    gMeme.lines[lineIdx].font = font;
+    getLine().font = font;
 }
 
 function toggleStroke() {
-    var lineIdx = gMeme.selectedLineIdx;
-    gMeme.lines[lineIdx].stroke = !gMeme.lines[lineIdx].stroke;
+    getLine().stroke = !getLine().stroke;
 }
 function moveline(diff) {
-    var lineIdx = gMeme.selectedLineIdx;
-    if (gMeme.lines[lineIdx].offsetY + diff - gMeme.lines[lineIdx].size < 0
-        || gMeme.lines[lineIdx].offsetY + diff > getCanvasHeight()) return; //for now a bug because canvas is bigger then picture
-    gMeme.lines[lineIdx].offsetY += diff;
+    if (getLine().offsetY + diff - getLine().size < 0
+        || getLine().offsetY + diff > getCanvasHeight()) return; //for now a bug because canvas is bigger then picture
+    getLine().offsetY += diff;
+}
+
+function moveLinePosition(pos) {
+    getLine().offsetX = pos.x;
+    getLine().offsetY = pos.y;
 }
 
 function addLine() {
@@ -83,14 +91,15 @@ function addLine() {
     var canvasHeight = getCanvasHeight();
     var lineOffset;
     if (gIsSecondLine) lineOffset = canvasHeight - 40;
-    else lineOffset = canvasHeight/2 -20;
+    else lineOffset = canvasHeight / 2 - 20;
     var newLine = {
         txt: '',
         size: 40,
-        offsetX: 'center',
         color: '#ffffff',
         font: 'impact',
         stroke: true,
+        isDrag: false,
+        offsetX: getCanvasWidth() / 2,
         offsetY: lineOffset
     }
     gMeme.lines.push(newLine);
@@ -101,16 +110,18 @@ function addLine() {
 function deleteLine() {
     var lineIdx = gMeme.selectedLineIdx;
     gMeme.lines.splice(lineIdx, 1);
-    gMeme.lines.sort((a,b) => a.offsetY - b.offsetY)
-    console.log(gMeme.lines);
     gMeme.selectedLineIdx = 0;
 }
 
-function selectLine(diff) {
-    gMeme.selectedLineIdx += 1
-    if (gMeme.selectedLineIdx > gMeme.lines.length - 1) gMeme.selectedLineIdx = 0;
+function selectLine(index) {
+    if (typeof index === 'number') { // number 0 is still false
+        gMeme.selectedLineIdx = index;
+    }
+    else {
+        gMeme.selectedLineIdx += 1
+        if (gMeme.selectedLineIdx > gMeme.lines.length - 1) gMeme.selectedLineIdx = 0;
+    }
 }
-
 
 function getImages() {
     return gImgs;

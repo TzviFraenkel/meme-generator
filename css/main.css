@@ -125,7 +125,7 @@ main{
 }
 .control-area .download {
     width: auto;
-    grid-area: 5/1/5/3;
+    grid-area: 4/4/4/6;
     padding: 0;
 }
 .control-area .download a {

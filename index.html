@@ -24,11 +24,11 @@
 
             <div class="control-area">
                 <input type="text" class="text-input" oninput="onTxtChange(this.value)" placeholder="Enter your text">
-                <button onclick="onMoveline(-1)" title="move line upwards">↥</button>
-                <button onclick="onMoveline(1)" title="move line downwards">↧</button>
-                <button class="fa up-down" onclick="onLineSlect()" title="select lines"></button>
-                <button class="fa trash" onclick="onDeleteLine()" title="“delete line"></button>
+                <!-- <button onclick="onMoveline(-1)" title="move line upwards">↥</button>
+                <button onclick="onMoveline(1)" title="move line downwards">↧</button> -->
+                <button class="fa up-down" onclick="onLineSelect()" title="select lines"></button>
                 <button class="fa add" onclick="onAddLine()" title="add new line"></button>
+                <button class="fa trash" onclick="onDeleteLine()" title="“delete line"></button>
                 <button data-sign="+" onclick="onChangeSize(this)" title="text size">A⁺</button>
                 <button data-sign="-" onclick="onChangeSize(this)" title="text size">A⁻</button>
                 <button class="fa align-left" data-align="left" onclick="onAlignChange(this)"
