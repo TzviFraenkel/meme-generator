@@ -44,6 +44,9 @@ body {
 .add::before{
     content: "\f067";
 } 
+.up-down::before{
+    content: "\f338";
+} 
 
 /* HAEDER */
 .header {
@@ -96,6 +99,7 @@ main{
     cursor: pointer;
 }
 /* EDITOR */
+/* layout */
 .meme-editor {
     width: 100%;
     display: flex;
@@ -113,7 +117,7 @@ main{
     gap: 15px;
 }
 .text-input{
-    grid-area: 1/1/1/5;
+    grid-area: 1/1/1/6;
     height: 40px;
 }
 .input-font {
@@ -122,7 +126,17 @@ main{
 .control-area .download {
     width: auto;
     grid-area: 5/1/5/3;
+    padding: 0;
 }
+.control-area .download a {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    line-height: 40px;
+    text-decoration: none;
+    color: inherit;
+}
+/* buttons */
 .control-area button {
     background-color: white;
     border-radius: 4px;
@@ -138,7 +152,6 @@ main{
     background-color: white;
     border-radius: 4px;
     border: none;   
-    display: -webkit-box;
     padding: 0;
     height: 40px;
     width: 40px;
@@ -146,6 +159,15 @@ main{
 .color-input:hover {
     background-color: rgb(167, 164, 164);
     cursor: pointer;
+}
+/* FOOTER */
+.footer {
+    height: 80px;
+    background-color: #ff7f00;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* BREAKPOINTS */ 

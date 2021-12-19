@@ -29,10 +29,10 @@ var gMeme = {
         {
             txt: '',
             size: 40,
-            align: 'center',
-            color: 'white',
+            color: '#ffffff',
             font: 'impact',
             stroke: true,
+            offsetX: 'center',
             offsetY: 50
         }
     ]
@@ -57,9 +57,9 @@ function changeSize(size) {
     gMeme.lines[lineIdx].size += size;
 }
 
-function alignChange(align) {
+function alignChange(offsetX) {
     var lineIdx = gMeme.selectedLineIdx;
-    gMeme.lines[lineIdx].align = align;
+    gMeme.lines[lineIdx].offsetX = offsetX;
 }
 
 function changeFont(font) {
@@ -87,8 +87,8 @@ function addLine() {
     var newLine = {
         txt: '',
         size: 40,
-        align: 'center',
-        color: 'white',
+        offsetX: 'center',
+        color: '#ffffff',
         font: 'impact',
         stroke: true,
         offsetY: lineOffset
@@ -107,9 +107,8 @@ function deleteLine() {
 }
 
 function selectLine(diff) {
-    gMeme.selectedLineIdx += diff
+    gMeme.selectedLineIdx += 1
     if (gMeme.selectedLineIdx > gMeme.lines.length - 1) gMeme.selectedLineIdx = 0;
-    if (gMeme.selectedLineIdx < 0) gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
 
 
